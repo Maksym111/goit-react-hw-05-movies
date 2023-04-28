@@ -25,6 +25,10 @@ const MovieDetails = () => {
         // signal: controller.signal,
         // }
       );
+
+      if (currentMovie === undefined) {
+        return;
+      }
       setData(currentMovie);
       setGenres(() => {
         if (!currentMovie?.genres) {
@@ -50,14 +54,21 @@ const MovieDetails = () => {
   }, [URL]);
 
   return (
-    <>
-      <Link to={backLinkHref.current}>Go back</Link>
-      <ContainerMovie data={data} genres={genres} />
-      <AdditionalInfo />
-      <Suspense fallback={<div>Loading...</div>}>
-        <Outlet />
-      </Suspense>
-    </>
+    <div>
+      {Object.keys(data).length > 0 && (
+        <>
+          <Link to={backLinkHref.current}>Go back</Link>
+          <ContainerMovie data={data} genres={genres} />
+          <AdditionalInfo />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Outlet />
+          </Suspense>
+        </>
+      )}
+      {Object.keys(data).length === 0 && (
+        <p>No data, maybe something went wrong...</p>
+      )}
+    </div>
   );
 };
 

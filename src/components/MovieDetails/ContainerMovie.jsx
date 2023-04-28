@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 import { Container, Info, PosterImg, Title } from './ContainerMovie.styled';
 
+const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+
 const ContainerMovie = ({ data, genres }) => {
   return (
     <>
       <Container>
         <div>
           <PosterImg
-            src={`https://api.themoviedb.org/3/movie/640146${data.poster_path}`}
+            src={`${IMG_URL}${data.poster_path}`}
             alt="Poster Movie"
             width="200"
             height="300"
